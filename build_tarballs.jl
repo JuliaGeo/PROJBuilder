@@ -31,7 +31,21 @@ platforms = [
 
 # The products that we will ensure are always built
 products(prefix) = [
-    LibraryProduct(prefix, "libproj", :libproj)
+    LibraryProduct(prefix, "libproj", :libproj),
+    
+    # complete contents of share/proj, must be kept up to date
+    FileProduct(prefix, joinpath("share", "proj", "CH"), :ch),
+    FileProduct(prefix, joinpath("share", "proj", "epsg"), :epsg),
+    FileProduct(prefix, joinpath("share", "proj", "esri"), :esri),
+    FileProduct(prefix, joinpath("share", "proj", "esri.extra"), :esri_extra),
+    FileProduct(prefix, joinpath("share", "proj", "GL27"), :gl27),
+    FileProduct(prefix, joinpath("share", "proj", "IGNF"), :ignf),
+    FileProduct(prefix, joinpath("share", "proj", "nad27"), :nad27),
+    FileProduct(prefix, joinpath("share", "proj", "nad83"), :nad83),
+    FileProduct(prefix, joinpath("share", "proj", "nad.lst"), :nad_lst),
+    FileProduct(prefix, joinpath("share", "proj", "other.extra"), :other_extra),
+    FileProduct(prefix, joinpath("share", "proj", "proj_def.dat"), :proj_def_dat),
+    FileProduct(prefix, joinpath("share", "proj", "world"), :world)
 ]
 
 # Dependencies that must be installed before this package can be built
