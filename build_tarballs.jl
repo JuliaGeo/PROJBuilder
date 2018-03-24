@@ -12,9 +12,8 @@ script = raw"""
 cd $WORKSPACE/srcdir
 cd proj-4.9.3/
 ./configure --prefix=$prefix --host=$target
-make -j2
+make -j${nproc}
 make install
-
 """
 
 # These are the platforms we will build for by default, unless further
