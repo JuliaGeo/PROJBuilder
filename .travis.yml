@@ -29,12 +29,12 @@ script:
 deploy:
     provider: releases
     api_key:
-        # Note; this api_key is only valid for visr/PROJBuilder; you need
+        # Note; this api_key is only valid for JuliaGeo/PROJBuilder; you need
         # to make your own: https://docs.travis-ci.com/user/deployment/releases/
         secure: HsThMSltYrbHb8rJw26qh42eHvZr+WeRgYR2ZBO41gIWotwnoYLaz7I4hgehN8OzmNV7rqvHAoc0vSrHwu/6CHkcuH0c+/w84Ay+Z6E6yLqhBZvX3FWwU2uS1PUEWx2elgxSEBvIXdUm1SiST4jExvnoQu6h2CAJBWgijrq2V8GVQD7CJP1QiafXQbWabkm2i9oW1xpzS7na7UUXWf97YdzeD/7KsneQACa0ikOJsR6cWwG9GO8iNtK3kNdDJUYWxnc7zp7jB1LrAChv5WO3QBH6izEOtFbkCC+gmt0xJ60fbLaBuENoyvyjxRw9aBpdHIU7mVjVm95rUCkwlZyTOm+U3CozsL3ZKgNSN92BRUNCVwCNhwHbSOM4aQbdLYb86ePIS6m6vgiOoHio48t0UbsQrZHfgo7QaMbDcWsROqNd+dpoyV5uhV35KYwiDOCCU2MuKx3QgeUljS4i1QAAPRj+Zp+8JFPygEGJC7t6LnAdhaazwz5dUnftA/MXPxDnmhn0xi3DnGIk2crUFU6In3JlzxgvPjLhCLuZY5s3Cm3b0hY/Dl3YGrkD28l/34RvqwyQDBbvozsC7wLg82WUY792JhAWlG1UDA4pSY9O54heJemQcagGXRmdCD4ddbKPe63sy9BrUWaUPKMxFmWBjTe7TavWzH34qwMUnhttIZI=
     file_glob: true
     file: products/*
     skip_cleanup: true
     on:
-        repo: visr/PROJBuilder
+        repo: JuliaGeo/PROJBuilder
         tags: true
