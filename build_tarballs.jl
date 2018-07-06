@@ -1,10 +1,11 @@
 using BinaryBuilder
 
+src_version = v"4.9.3"  # also change in raw script string
+
 # Collection of sources required to build PROJ
 sources = [
-    "http://download.osgeo.org/proj/proj-4.9.3.tar.gz" =>
+    "http://download.osgeo.org/proj/proj-$src_version.tar.gz" =>
     "6984542fea333488de5c82eea58d699e4aff4b359200a9971537cd7e047185f7",
-
 ]
 
 # Bash recipe for building across all platforms
@@ -54,5 +55,5 @@ dependencies = [
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, "PROJ", sources, script, platforms, products, dependencies)
+build_tarballs(ARGS, "PROJ", src_version, sources, script, platforms, products, dependencies)
 
