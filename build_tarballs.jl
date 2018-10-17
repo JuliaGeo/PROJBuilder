@@ -1,34 +1,23 @@
 using BinaryBuilder
 
-src_version = v"4.9.3"  # also change in raw script string
+src_version = v"5.2.0"  # also change in raw script string
 
 # Collection of sources required to build PROJ
 sources = [
     "http://download.osgeo.org/proj/proj-$src_version.tar.gz" =>
-    "6984542fea333488de5c82eea58d699e4aff4b359200a9971537cd7e047185f7",
+    "ef919499ffbc62a4aae2659a55e2b25ff09cccbbe230656ba71c6224056c7e60",
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir
-cd proj-4.9.3/
+cd proj-5.2.0/
 ./configure --prefix=$prefix --host=$target
 make -j${nproc}
 make install
 """
 
-# These are the platforms we will build for by default, unless further
-# platforms are passed in on the command line
-platforms = [
-    BinaryProvider.Linux(:i686, :glibc),
-    BinaryProvider.Linux(:x86_64, :glibc),
-    BinaryProvider.Linux(:aarch64, :glibc),
-    BinaryProvider.Linux(:armv7l, :glibc),
-    BinaryProvider.Linux(:powerpc64le, :glibc),
-    BinaryProvider.MacOS(),
-    BinaryProvider.Windows(:i686),
-    BinaryProvider.Windows(:x86_64)
-]
+platforms = supported_platforms()
 
 # The products that we will ensure are always built
 products(prefix) = [
@@ -50,10 +39,7 @@ products(prefix) = [
 ]
 
 # Dependencies that must be installed before this package can be built
-dependencies = [
-    
-]
+dependencies = []
 
 # Build the tarballs, and possibly a `build.jl` as well.
 build_tarballs(ARGS, "PROJ", src_version, sources, script, platforms, products, dependencies)
-
