@@ -15,7 +15,29 @@ env:
   global:
     - BINARYBUILDER_DOWNLOADS_CACHE=downloads
     - BINARYBUILDER_AUTOMATIC_APPLE=true
+  # Our build takes too long for one job, so split targets across multiple jobs
+  # triplets come from using BinaryBuilder; triplet.(supported_platforms())
+  matrix:
+    - TARGET=i686-linux-gnu
+    - TARGET=x86_64-linux-gnu
+    - TARGET=aarch64-linux-gnu
+    - TARGET=arm-linux-gnueabihf
+    - TARGET=powerpc64le-linux-gnu
+    - TARGET=i686-linux-musl
+    - TARGET=x86_64-linux-musl
+    - TARGET=aarch64-linux-musl
+    - TARGET=arm-linux-musleabihf
+    - TARGET=x86_64-apple-darwin14
+    - TARGET=x86_64-unknown-freebsd11.1
+    - TARGET=i686-w64-mingw32
+    - TARGET=x86_64-w64-mingw32
 sudo: required
+
+jobs:
+  include:
+    - stage: regenerate build.jl
+      script: julia --color=yes build_tarballs.jl --only-buildjl
+      if: tag IS present
 
 # Before anything else, get the latest versions of things
 before_script:
@@ -24,7 +46,7 @@ before_script:
       Pkg.add(PackageSpec(name="BinaryBuilder", rev="master"))'
 
 script:
-  - julia --color=yes build_tarballs.jl
+  - julia --color=yes build_tarballs.jl $TARGET
 
 deploy:
     provider: releases
