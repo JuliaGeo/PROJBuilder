@@ -1,19 +1,25 @@
 using BinaryBuilder
 
-src_version = v"5.2.0"  # also change in raw script string
+src_version = v"5.2.0"
 
 # Collection of sources required to build PROJ
 sources = [
-    "http://download.osgeo.org/proj/proj-$src_version.tar.gz" =>
+    "https://github.com/OSGeo/proj.4/releases/download/5.2.0/proj-5.2.0.tar.gz" =>
     "ef919499ffbc62a4aae2659a55e2b25ff09cccbbe230656ba71c6224056c7e60",
+
+    "https://github.com/OSGeo/proj-datumgrid/archive/1.8.tar.gz" =>
+    "cb3f5907ae415b7b4180dbec8633d62a0640af1f91839c8fb0db6b2eb0a165ac",
+
 ]
+
 
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir
+mv proj-datumgrid-1.8/* proj-5.2.0/nad/
 cd proj-5.2.0/
 ./configure --prefix=$prefix --host=$target
-make -j${nproc}
+make
 make install
 """
 
