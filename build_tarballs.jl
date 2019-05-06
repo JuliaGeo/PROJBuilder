@@ -33,6 +33,7 @@ cmake -DCMAKE_INSTALL_PREFIX=$prefix \
       -DSQLITE3_INCLUDE_DIR=$prefix/include \
       -DSQLITE3_LIBRARY=$SQLITE3_LIBRARY \
       -DHAVE_PTHREAD_MUTEX_RECURSIVE_DEFN=1 \
+      -DBUILD_LIBPROJ_SHARED=ON \
       ..
 cmake --build .
 make install
