@@ -29,8 +29,12 @@ env:
     - TARGET=arm-linux-musleabihf
     - TARGET=x86_64-apple-darwin14
     - TARGET=x86_64-unknown-freebsd11.1
-    - TARGET=i686-w64-mingw32
-    - TARGET=x86_64-w64-mingw32
+    # on Windows use GCC 7 instead of 4 to avoid cxx11 string ABI
+    # mismatch issues, for more information see
+    # https://github.com/JuliaPackaging/BinaryBuilder.jl/issues/407
+    # https://github.com/JuliaPackaging/Yggdrasil/blob/master/RootFS.md
+    - TARGET=i686-w64-mingw32-gcc7
+    - TARGET=x86_64-w64-mingw32-gcc7
 sudo: required
 
 jobs:

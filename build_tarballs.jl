@@ -1,18 +1,18 @@
 using BinaryBuilder
 
-src_version = v"6.0.0"
+src_version = v"6.1.0"  # also change below in script
 
 # Collection of sources required to build PROJ
 sources = [
-    "http://download.osgeo.org/proj/proj-6.0.0.tar.gz" =>
-    "4510a2c1c8f9056374708a867c51b1192e8d6f9a5198dd320bf6a168e44a3657",
+    "http://download.osgeo.org/proj/proj-$src_version.tar.gz" =>
+    "676165c54319d2f03da4349cbd7344eb430b225fe867a90191d848dc64788008",
 ]
 
 
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir
-cd proj-6.0.0
+cd proj-6.1.0
 
 # sqlite needed to build proj.db, so this should not be the
 # cross-compiled one since it needs to be executed on the host
@@ -44,6 +44,7 @@ tar xzf proj-datumgrid-1.8.tar.gz -C $prefix/share/proj/
 """
 
 platforms = supported_platforms()
+platforms = expand_gcc_versions(platforms)
 
 # The products that we will ensure are always built
 products(prefix) = [
@@ -83,7 +84,7 @@ products(prefix) = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    "https://github.com/JuliaDatabases/SQLiteBuilder/releases/download/v0.9.0/build_SQLiteBuilder.v0.1.0.jl"
+    "https://github.com/JuliaDatabases/SQLiteBuilder/releases/download/v0.10.0/build_SQLite.v3.28.0.jl"
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
